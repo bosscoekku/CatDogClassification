@@ -4,8 +4,7 @@ from flask import Flask, render_template, session, redirect, url_for, session,re
 from flask_wtf import FlaskForm
 #from PIL import Image
 from tensorflow.keras.models import load_model
-#from tensorflow.keras.preprocessing import image
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
 
 
