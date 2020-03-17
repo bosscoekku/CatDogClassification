@@ -8,7 +8,46 @@ from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
 
 
+app = Flask(__name__)
+# Configure a secret SECRET_KEY
+# We will later learn much better ways to do this!!
+app.config['SECRET_KEY'] = 'mysecretkey'
+app.config["IMAGE_UPLOADS"] = "static"
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
+# REMEMBER TO LOAD THE MODEL AND THE SCALER!
+catdog_model = load_model("cat_dog_detector_finetune.h5")
+
+
+def allowed_image(filename):
+
+    if not "." in filename:
+        return False
+
+    ext = filename.rsplit(".", 1)[1]
+
+    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+
+def allowed_image_filesize(filesize):
+
+    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
+
+
+
+def load_cv2(img_path):
+    img_data = cv2.imread(img_path)
+    img_data = cv2.resize(img_data,(128,128))
+    img_data = img_data/255.0
+    img_data = img_data.reshape(1, 128, 128, 3)
+    return img_data
 
 
 
@@ -60,47 +99,6 @@ def index():
 
 
 '''
-
-
-def allowed_image(filename):
-
-    if not "." in filename:
-        return False
-
-    ext = filename.rsplit(".", 1)[1]
-
-    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
-        return True
-    else:
-        return False
-
-
-def allowed_image_filesize(filesize):
-
-    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
-        return True
-    else:
-        return False
-
-
-
-def load_cv2(img_path):
-    img_data = cv2.imread(img_path)
-    img_data = cv2.resize(img_data,(128,128))
-    img_data = img_data/255.0
-    img_data = img_data.reshape(1, 128, 128, 3)
-    return img_data
-
-app = Flask(__name__)
-# Configure a secret SECRET_KEY
-# We will later learn much better ways to do this!!
-app.config['SECRET_KEY'] = 'mysecretkey'
-app.config["IMAGE_UPLOADS"] = "static"
-app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
-app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
-
-# REMEMBER TO LOAD THE MODEL AND THE SCALER!
-catdog_model = load_model("cat_dog_detector_finetune.h5")
 
 @app.route("/forward", methods=["GET", "POST"])
 def move_forward():
