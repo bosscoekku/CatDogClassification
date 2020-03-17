@@ -1,10 +1,10 @@
 import os
+import cv2
 import numpy as np  
 from flask import Flask, render_template, session, redirect, url_for, session,request
 from flask_wtf import FlaskForm
 #from PIL import Image
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
 
 
@@ -30,15 +30,15 @@ def allowed_image_filesize(filesize):
     else:
         return False
 
-def load_imagefrom(img_path):
-    img = image.load_img(img_path, target_size=(128, 128))
-    img_tensor = image.img_to_array(img)                    # (height, width, channels)
-    img_tensor = np.expand_dims(img_tensor, axis=0)         # (1, height, width, channels), add a dimension because the model expects this shape: (batch_size, height, width, channels)
-    img_tensor /= 255.                                      # imshow expects values in the range [0, 1]
 
-    return img_tensor
 
-    
+def load_cv2(img_path):
+    img_data = cv2.imread(img_path)
+    img_data = cv2.resize(img_data,(128,128))
+    img_data = img_data/255.0
+    img_data = img_data.reshape(1, 128, 128, 3)
+    return img_data
+
 app = Flask(__name__)
 # Configure a secret SECRET_KEY
 # We will later learn much better ways to do this!!
@@ -85,7 +85,7 @@ def upload_image():
                 print(path_img)
                 image.save(path_img)
                 print("Image saved")
-                new_image = load_imagefrom(path_img)
+                new_image = load_cv2(path_img)
                 # check prediction
                 classes = catdog_model.predict(new_image)
                 print(f"Class accuracy :{classes[0][0]*100.0} %",)
