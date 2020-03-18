@@ -1,8 +1,8 @@
-#import os
-#import cv2
-#import numpy as np  
-#from tensorflow.keras.models import load_model
-#from werkzeug.utils import secure_filename
+import os
+import cv2
+import numpy as np  
+from tensorflow.keras.models import load_model
+from werkzeug.utils import secure_filename
 from flask import Flask, render_template, session, redirect, url_for, session,request,jsonify
 from flask_wtf import FlaskForm
 
