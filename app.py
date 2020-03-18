@@ -15,7 +15,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-catdog_model = load_model("cat_dog_detector_finetune.h5")
+#catdog_model = load_model("cat_dog_detector_finetune.h5")
 
 
 def allowed_image(filename):
