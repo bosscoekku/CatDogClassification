@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, session, redirect, url_for, session,request,jsonify
-from flask_wtf import FlaskForm
+#from flask_wtf import FlaskForm
 
 app = Flask(__name__)
 # Configure a secret SECRET_KEY
@@ -15,7 +15,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-catdog_model = load_model("cat_dog_detector_finetune.h5")
+catdog_model = load_model("malaria_detector.h5")
 
 
 def allowed_image(filename):
@@ -95,8 +95,8 @@ def index():
     return "<h1>Welcome to our server !!</h1>"
 
 
-
 '''
+
 
 @app.route("/forward", methods=["GET", "POST"])
 def move_forward():
@@ -127,7 +127,7 @@ def upload_image():
                 new_image = load_cv2(path_img)
                 # check prediction
                 classes = catdog_model.predict(new_image)
-                print(f"Class accuracy :{classes[0][0]*100.0} %",)
+                #print(f"Class accuracy :{classes[0][0]*100.0} %")
                 if classes[0][0]*100.0>50:
                     results = "dog"
                 else:
