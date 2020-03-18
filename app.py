@@ -15,7 +15,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-#catdog_model = load_model("cat_dog_detector_finetune.h5")
+catdog_model = load_model("cat_dog_detector_finetune.h5")
 
 
 def allowed_image(filename):
@@ -48,7 +48,7 @@ def load_cv2(img_path):
     return img_data
 
 
-
+'''
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
@@ -102,9 +102,7 @@ def index():
 def move_forward():
     return render_template('upload.html')
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    return render_template('upload.html')
+
 
 
 @app.route("/upload_image", methods=["GET", "POST"])
@@ -140,7 +138,10 @@ def upload_image():
                 return "<h1 style='color: red;'>That file extension is not allowed!</h1>"
     
     return render_template('prediction.html',results=results,pathImage = path_img)
-'''
+
+@app.route("/")
+def index():
+    return render_template('upload.html')
 
 if __name__ == '__main__':
     app.run()
