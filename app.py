@@ -1,12 +1,10 @@
-import os
-import cv2
-import numpy as np  
+#import os
+#import cv2
+#import numpy as np  
+#from tensorflow.keras.models import load_model
+#from werkzeug.utils import secure_filename
 from flask import Flask, render_template, session, redirect, url_for, session,request,jsonify
 from flask_wtf import FlaskForm
-#from PIL import Image
-from tensorflow.keras.models import load_model
-from werkzeug.utils import secure_filename
-
 
 app = Flask(__name__)
 # Configure a secret SECRET_KEY
@@ -145,5 +143,4 @@ def upload_image():
 '''
 
 if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
     app.run()
