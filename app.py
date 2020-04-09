@@ -15,7 +15,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-catdog_model = load_model("malaria_detector.h5")
+model_malaria = load_model("cat_dog_detector10042020.h5")
 
 
 def allowed_image(filename):
@@ -40,62 +40,13 @@ def allowed_image_filesize(filesize):
 
 
 
+# load image
 def load_cv2(img_path):
     img_data = cv2.imread(img_path)
-    img_data = cv2.resize(img_data,(128,128))
+    img_data = cv2.resize(img_data,(150,150))
     img_data = img_data/255.0
-    img_data = img_data.reshape(1, 128, 128, 3)
+    img_data = img_data.reshape(1, 150, 150, 3)
     return img_data
-
-
-'''
-
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from url parameter
-    name = request.args.get("name", None)
-
-    # For debugging
-    print(f"got name {name}")
-
-    response = {}
-
-    # Check if user sent a name at all
-    if not name:
-        response["ERROR"] = "no name found, please send a name."
-    # Check if the user entered a number not a name
-    elif str(name).isdigit():
-        response["ERROR"] = "name can't be numeric."
-    # Now the user entered a valid name
-    else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
-
-    # Return the response in json format
-    return jsonify(response)
-
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        return jsonify({
-            "Message": f"Welcome {name} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD" : "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
-        })
-
-# A welcome message to test our server
-@app.route('/')
-def index():
-    return "<h1>Welcome to our server !!</h1>"
-
-
-'''
 
 
 @app.route("/forward", methods=["GET", "POST"])
@@ -126,18 +77,19 @@ def upload_image():
                 print("Image saved")
                 new_image = load_cv2(path_img)
                 # check prediction
-                classes = catdog_model.predict(new_image)
-                #print(f"Class accuracy :{classes[0][0]*100.0} %")
-                if classes[0][0]*100.0>50:
-                    results = "dog"
+                classes = model_malaria.predict(new_image)
+                msg_result = f"Class probability :{format(classes[0][0]*100.0,'.2f')} %"
+                print(msg_result)
+                if classes[0][0]*100.0<50:
+                    results = "Dog"
                 else:
-                    results = "cat"
+                    results = "Cat"
 
             else:
                 print("That file extension is not allowed")
                 return "<h1 style='color: red;'>That file extension is not allowed!</h1>"
     
-    return render_template('prediction.html',results=results,pathImage = path_img)
+    return render_template('prediction.html',results=results,pathImage = path_img,msg = msg_result)
 
 @app.route("/")
 def index():
