@@ -51,7 +51,7 @@ def load_cv2(img_path):
 
 @app.route("/forward", methods=["GET", "POST"])
 def move_forward():
-    return render_template('upload.html')
+    return render_template('backup.html')
 
 
 
@@ -93,7 +93,7 @@ def upload_image():
 
 @app.route("/")
 def index():
-    return render_template('upload.html')
+    return render_template('backup.html')
 
 if __name__ == '__main__':
     app.run()
