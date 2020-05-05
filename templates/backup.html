@@ -53,7 +53,6 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
-
     <div class="container">
       <div class="row">
         <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
@@ -62,7 +61,7 @@
            
             <div class="file-upload">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <button class="btn-get-started scrollto" type="button" onclick="$('.file-upload-input').trigger( 'click' )">เพิ่มรูปภาพ</button>
+              <button class="btn-get-started scrollto" align="center" type="button" onclick="$('.file-upload-input').trigger( 'click' )">เพิ่มรูปภาพ</button>
               
               <div class="image-upload-wrap">
                 <form action="/upload_image" method="POST" enctype="multipart/form-data">
@@ -75,10 +74,8 @@
               <div class="file-upload-content">
                 <img class="file-upload-image" src="#" style=" max-width: 500px;max-height:500px;" alt="your image" />
                 <div class="image-title-wrap">
-                  <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                </div>
-                <div class="image-title-wrap2">
-                  <button type="submit"  style="background-color:#BDA20E; border-color:red; color:white" class="remove-image">Prediction Image</span></button> 
+                  <button class="btn-get-started scrollto" type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                  <button class="btn-get-started scrollto" type="submit"  style="background-color:#BDA20E; border-color:red; color:white" class="remove-image">Prediction Image</span></button> 
                 </div>
               </form>
               
@@ -88,6 +85,7 @@
 
           </div>
         </div>
+
         <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
           <img src="../static/img_5.jpg" class="img-fluid animated" alt="">
           <br>

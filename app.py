@@ -15,7 +15,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-model_malaria = load_model("cat_dog_detector10042020.h5")
+model_malaria = load_model("model.h5")
 
 
 def allowed_image(filename):
@@ -43,9 +43,9 @@ def allowed_image_filesize(filesize):
 # load image
 def load_cv2(img_path):
     img_data = cv2.imread(img_path)
-    img_data = cv2.resize(img_data,(150,150))
+    img_data = cv2.resize(img_data,(224,224))
     img_data = img_data/255.0
-    img_data = img_data.reshape(1, 150, 150, 3)
+    img_data = img_data.reshape(1, 224, 224, 3)
     return img_data
 
 
@@ -81,9 +81,9 @@ def upload_image():
                 msg_result = f"Class probability :{format(classes[0][0]*100.0,'.2f')} %"
                 print(msg_result)
                 if classes[0][0]*100.0<50:
-                    results = "Dog"
-                else:
                     results = "Cat"
+                else:
+                    results = "Dog"
 
             else:
                 print("That file extension is not allowed")
