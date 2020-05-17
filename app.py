@@ -15,7 +15,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 * 1024 * 1024
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-model_malaria = load_model("model.h5")
+model_malaria = load_model("modelAddDataAug200Epoc.h5")
 
 
 def allowed_image(filename):
@@ -43,15 +43,15 @@ def allowed_image_filesize(filesize):
 # load image
 def load_cv2(img_path):
     img_data = cv2.imread(img_path)
-    img_data = cv2.resize(img_data,(224,224))
+    img_data = cv2.resize(img_data,(118,118))
     img_data = img_data/255.0
-    img_data = img_data.reshape(1, 224, 224, 3)
+    img_data = img_data.reshape(1, 118, 118, 3)
     return img_data
 
 
 @app.route("/forward", methods=["GET", "POST"])
 def move_forward():
-    return render_template('backup.html')
+    return render_template('index.html')
 
 
 
@@ -93,7 +93,7 @@ def upload_image():
 
 @app.route("/")
 def index():
-    return render_template('backup.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()
