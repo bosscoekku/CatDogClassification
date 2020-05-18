@@ -1,0 +1,15 @@
+2020-05-19 00:39:21.569 | DEBUG    | __main__:allowed_image:34 - Checking filename is dog.4010.jpg
+2020-05-19 00:39:21.573 | DEBUG    | __main__:allowed_image:39 - Checking extion file  is jpg
+2020-05-19 00:39:21.577 | INFO     | __main__:upload_image:89 - Save image succesful
+2020-05-19 00:39:21.580 | DEBUG    | __main__:load_cv2:57 - Path image is static\dog.4010.jpg
+2020-05-19 00:39:21.876 | INFO     | __main__:upload_image:94 - Class probability :97.88 %
+2020-05-19 00:40:00.791 | DEBUG    | __main__:allowed_image:34 - Checking filename is dog.4044.jpg
+2020-05-19 00:40:00.795 | DEBUG    | __main__:allowed_image:39 - Checking extion file  is jpg
+2020-05-19 00:40:00.808 | INFO     | __main__:upload_image:89 - Save image succesful
+2020-05-19 00:40:00.816 | DEBUG    | __main__:load_cv2:57 - Path image is static\dog.4044.jpg
+2020-05-19 00:40:00.914 | INFO     | __main__:upload_image:94 - Class probability :91.79 %
+2020-05-19 00:40:09.531 | DEBUG    | __main__:allowed_image:34 - Checking filename is dog.4009.jpg
+2020-05-19 00:40:09.531 | DEBUG    | __main__:allowed_image:39 - Checking extion file  is jpg
+2020-05-19 00:40:09.538 | INFO     | __main__:upload_image:89 - Save image succesful
+2020-05-19 00:40:09.540 | DEBUG    | __main__:load_cv2:57 - Path image is static\dog.4009.jpg
+2020-05-19 00:40:09.612 | INFO     | __main__:upload_image:94 - Class probability :78.05 %
