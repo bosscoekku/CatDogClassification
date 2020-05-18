@@ -23,11 +23,7 @@ logger.add(sys.stderr, format="{time} {level} {message}", filter="my_module", le
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
 modelName = "modelAddDataAug200Epoc.h5"
 model_malaria = load_model(modelName)
-
-
 logger.info("Start with model name is {}".format(modelName))
-
-
 
 
 def allowed_image(filename):
